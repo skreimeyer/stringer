@@ -28,7 +28,13 @@ fn main() {
         match i {
             syn::Item::Fn(func) => {
                 println!("Found a function with identity: {:?}", func.sig.ident);
-                println!("Span is: {:?} to {:?}", i.span().start(), i.span().end())
+                let sp = i.span();
+                let st = sp.start();
+                let en = sp.end();
+                let st_loc = (st.line, st.column);
+                let en_loc = (en.line, en.column);
+
+                println!("Span is: line:{} col:{} to line:{} col:{}", st_loc.0, st_loc.1, en_loc.0, en_loc.1)
             },
             _ => continue
         }
